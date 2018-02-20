@@ -13,6 +13,8 @@ console.log("x is a random integer = " + x);
 // but don't execute it at this time.
 // In fact it will only be fired at the very end
 // THIS IS THE CALLBACK
+console.log("We define myFunc1 function");
+
 function myFunc1(arg) {
   total = z * 2 + arg;
   console.log("myFunc1(arg)");
@@ -33,12 +35,12 @@ myFunc2(myFunc1);
 // the callback and the returning result of another function
 // which itself has two arguments: the callback and a random integer
 function myFunc2(cb) {
-  console.log("myFunc2(cb)");
+  console.log("We define myFunc2(cb)");
   x += 5;
   console.log("x = x + 5 = " + x)
   console.log("cb has the value of the argument = myFunc1: " + cb);
   // console.log(cb);
-  console.log("Now we run myFunc3, which fires myFunc4 to use it as an argument")
+  console.log("myFunc2 runs myFunc3, which fires myFunc4 to use it as an argument")
   console.log("**********");
   myFunc3(cb, myFunc4(cb, Math.round(Math.random() * 10)));
 }
@@ -46,11 +48,11 @@ function myFunc2(cb) {
 // Define another function with 2 parameters
 // This function will finally fire the callback!!!
 function myFunc3(cb, arg2) {
-  console.log("myFunc3(cb, arg2)");
+  console.log("We define myFunc3(cb, arg2)");
   console.log("arg2 = y (returning from myFunc4) = " + arg2);
   z = x + arg2;
   console.log("z = x + y = " + z);
-  console.log("cb still have the same value: " + cb);
+  console.log("cb still has the same value that we pass through functions: " + cb);
   console.log("Here we are! Now myFunc3 fires the callback")
   console.log("**********");
   cb(4);
@@ -60,11 +62,12 @@ function myFunc3(cb, arg2) {
 // This function returns a value that will be used
 // as an argument by myFunc3 (see above)
 function myFunc4(cb, arg3) {
-  console.log("myFunc4(cb, arg3)");
+  console.log("We define myFunc4(cb, arg3)");
   console.log("arg3 is a random integer = " + arg3)
   y = x + arg3;
   console.log("y = x + arg3 = " + x + " + " + arg3 + " = " + y);
-  console.log("cb still have the same value: " + cb);
+  console.log("cb still have the same value that we pass through functions: " + cb);
+  console.log("myFunc4 returns 'y' value which will be used as a myFunc3 argument")
   console.log("**********");
   return y;
 }
